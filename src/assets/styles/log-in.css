@@ -1,0 +1,110 @@
+:root {
+    font-family: Montserrat, sans-serif;
+    background-color: #2f3242;
+}
+
+a {
+    cursor: pointer;
+}
+
+.log-in-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 500px;
+}
+
+.log-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.log-in-title {
+    color: #2196f3;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.sign-up-link:active {
+    color: #ffffff;
+}
+
+.sign-up-link:visited {
+    color:#6333e9;
+}
+
+.log-in-form {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70px;
+}
+
+.log-in-form_email {
+    width: 175px;
+    height: 20px;
+    border: 2px solid #2196f3;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+.log-in-form_pass {
+    margin-top: 10px;
+    width: 175px;
+    height: 20px;
+    border: 2px solid #2196f3;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+.log-warning {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #ff0000;
+    text-align: center;
+}
+
+.sign-warning {
+    margin-top: 35px;
+    color: #ff0000;
+    text-align: center;
+}
+
+.reset-warning {
+    margin-top: 35px;
+    color: #ff0000;
+    text-align: center;
+}
+
+.submit-btn {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 133px;
+    height: 48px;
+    border-radius: 24px;
+    border: 2px solid #2196f3;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.remember {
+    margin-top: 20px;
+}
+
+.remember:active {
+    color:#ffffff;
+}
+
+.remember:visited {
+    color:#6333e9;
+}

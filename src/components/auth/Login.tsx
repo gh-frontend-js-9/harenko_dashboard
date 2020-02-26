@@ -1,18 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Link, Redirect} from 'react-router-dom'
 import '../../assets/styles/log-in.css'
-import App from '../../App'
-import {SignForm} from './SignUp'
-import {ResetForm} from './Reset'
-
-const url = 'https://geekhub-frontend-js-9.herokuapp.com/api/users/login';
 
 export class LoginForm extends React.Component<any, any> {
-    constructor(props: any) {
+    constructor(props: Object) {
         super(props);
         this.state = {
            email: '',
-           password: '' 
+           password: '',
+           isOk: false 
           };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +24,7 @@ export class LoginForm extends React.Component<any, any> {
   }
 
     handleSubmit(event: any) {
-      fetch(url, {
+      fetch('https://geekhub-frontend-js-9.herokuapp.com/api/users/login', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -41,10 +38,9 @@ export class LoginForm extends React.Component<any, any> {
           })
         .then(response => {
           if (response.ok) {
-            ReactDOM.render (
-              <App />,
-              document.getElementById('root')
-            )
+            this.setState({
+              isOk: true
+            })
             return response
           } else {
             ReactDOM.render (
@@ -57,13 +53,21 @@ export class LoginForm extends React.Component<any, any> {
         event.preventDefault()
     }
         
+    redirect() {
+      if (this.state.isOk) {
+        return (
+          <Redirect to="/Dashboard" />
+        )
+      }
+    }
 
     render() {
         return (
             <div className="log-in-area">
                 <div className="log-in">
+                  {this.redirect()}
                     <span className="log-in-title">Log in</span>
-                    <a className="sign-up-link" onClick={() => {ReactDOM.render (<SignForm />, document.getElementById('root')) }}>Not a member?</a>
+                    <Link className="sign-up-link" to="/Sign">Not a member?</Link>
                     <form onSubmit={this.handleSubmit} className="log-in-form" id="form">
                         <input 
                         onChange={this.handleChange} 
@@ -80,7 +84,7 @@ export class LoginForm extends React.Component<any, any> {
                         value={this.state.password} 
                         placeholder="Password..." />
                         <div className="log-warning" id="warning-area"></div>
-                        <a className="remember" onClick={() => {ReactDOM.render (<ResetForm />, document.getElementById('root')) }}>Forgot password?</a>
+                        <Link className="remember" to="/Reset">Forgot password?</Link>
                         <button className="submit-btn" type="submit">Log in</button>
                     </form>
                    </div>

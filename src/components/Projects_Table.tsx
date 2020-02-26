@@ -8,8 +8,23 @@ type Resp = {
   response: [];
 }
 
+type Project = {
+  title: string,
+  company: string,
+  cost: string,
+  deadline: string,
+  created_at: string,
+  timeSpent: string,
+  progress: number,
+  status: string,
+  assigned: {
+    name: string,
+    position: string
+  },
+}
+
 export class GetAllProjects extends React.Component<{}, Resp> {
-  constructor(props: any) {
+  constructor(props: object) {
     super(props);
     this.state = {
       response: []
@@ -32,7 +47,7 @@ export class GetAllProjects extends React.Component<{}, Resp> {
   }
 
   render() {
-    const project = this.state.response.map((project: any) => {
+    const project = this.state.response.map((project: Project) => {
         return (
         <tr className="table-row">
           <td className="table-title">{project.title}<br />

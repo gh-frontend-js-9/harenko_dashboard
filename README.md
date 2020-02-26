@@ -1,6 +1,6 @@
 # harenko_dashboard
 
 Link: https://virtus.netlify.com
-Comment: Have problems, still working
+Comment: Redux is not ready yet
 
 Status: in progress

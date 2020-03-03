@@ -1,11 +1,11 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import {ControlPanel} from './ProjectControl';
+import {userToken} from './User';
 let moment = require('moment');
 
-let userToken: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU'
-
 type Resp = {
-  response: [];
+  response: [],
 }
 
 type Project = {
@@ -23,7 +23,7 @@ type Project = {
   },
 }
 
-export class GetAllProjects extends React.Component<{}, Resp> {
+export class Projects extends React.Component<{}, Resp> {
   constructor(props: object) {
     super(props);
     this.state = {
@@ -41,14 +41,14 @@ export class GetAllProjects extends React.Component<{}, Resp> {
       .then(response => response.json())
       .then(response => {
         this.setState({
-          response: response,
+          response: response
         })
       });
   }
 
   render() {
     const project = this.state.response.map((project: Project) => {
-        return (
+      return (
         <tr className="table-row">
           <td className="table-title">{project.title}<br />
             <span className="table-subtitle">{project.company}</span></td>
@@ -63,43 +63,38 @@ export class GetAllProjects extends React.Component<{}, Resp> {
           <td className="table-userinfo">
             <div className="user-profile-block_user-photo"></div>
             <div>
-            {project.assigned ? project.assigned.name : 'User'}<br />
-            <span className="table-subtitle">{project.assigned ? project.assigned.position : 'Frontend Developer'}</span>
+              {project.assigned ? project.assigned.name : 'User'}<br />
+              <span className="table-subtitle">{project.assigned ? project.assigned.position : 'Frontend Developer'}</span>
             </div>
-            </td>
+          </td>
         </tr>
-    )})
+      )
+    })
 
     return (
-      <>
-        {project}
-      </>
+      <div className="screen-block" id="screen">
+        <ControlPanel allProjects={this.state.response.length} />
+        <div className="table-area">
+          <table id="table">
+            <thead className="table-head">
+              <tr>
+                <th>Project title</th>
+                <th>Value</th>
+                <th>Deadline</th>
+                <th>Time spent</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Assigned to</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {project}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     )
   }
-}
-
-
-
-export const ProjectTable: React.FC = () => {
-  return (
-    <div className="table-area">
-      <table id="table">
-        <thead className="table-head">
-          <tr>
-            <th>Project title</th>
-            <th>Value</th>
-            <th>Deadline</th>
-            <th>Time spent</th>
-            <th>Progress</th>
-            <th>Status</th>
-            <th>Assigned to</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <GetAllProjects />
-        </tbody>
-      </table>
-    </div>
-  )
 }

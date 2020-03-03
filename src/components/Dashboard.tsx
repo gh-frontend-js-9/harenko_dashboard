@@ -1,8 +1,7 @@
 import React from 'react';
 import '../assets/styles/projects.css'
-import { Header, Sidebar } from './Frame'
-import { ControlPanel } from './Project_Control'
-import { ProjectTable } from './Projects_Table'
+import {Header, Sidebar} from './Frame'
+import {Projects} from './ProjectsTable'
 
 const Dashboard: React.FC = () => {
     return (
@@ -10,14 +9,11 @@ const Dashboard: React.FC = () => {
         <Header />
         <main className="main">
           <Sidebar />
-          <div className="screen-block" id="screen">
-            <ControlPanel />
-            <ProjectTable />
-          </div>
+          <Projects />
         </main>
       </>
     )
-  }
+    }
   
   export default Dashboard;
   

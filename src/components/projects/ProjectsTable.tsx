@@ -1,7 +1,7 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import {ControlPanel} from './ProjectControl';
-import {userToken} from './User';
+import { ControlPanel } from './ProjectControl';
+import { userToken } from '../User';
 let moment = require('moment');
 
 type Resp = {
@@ -23,7 +23,7 @@ type Project = {
   },
 }
 
-export class Projects extends React.Component<{}, Resp> {
+export class Projects extends React.Component<object, Resp> {
   constructor(props: object) {
     super(props);
     this.state = {
@@ -34,16 +34,15 @@ export class Projects extends React.Component<{}, Resp> {
   componentDidMount() {
     fetch('https://geekhub-frontend-js-9.herokuapp.com/api/projects/', {
       method: 'GET',
+      mode: 'cors',
       headers: {
-        'x-access-token': userToken
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          response: response
-        })
-      });
+          'x-access-token': userToken
+      },
+  })
+  .then(response => response.json())
+  .then(response => {
+    this.setState({response: response})
+  })
   }
 
   render() {
@@ -72,10 +71,10 @@ export class Projects extends React.Component<{}, Resp> {
     })
 
     return (
-      <div className="screen-block" id="screen">
+      <div className="screen-block">
         <ControlPanel allProjects={this.state.response.length} />
         <div className="table-area">
-          <table id="table">
+          <table>
             <thead className="table-head">
               <tr>
                 <th>Project title</th>

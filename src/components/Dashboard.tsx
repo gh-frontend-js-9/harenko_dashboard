@@ -1,7 +1,7 @@
 import React from 'react';
-import '../assets/styles/projects.css'
 import {Header, Sidebar} from './Frame'
-import {Projects} from './ProjectsTable'
+import DashboardRouteMap from './DashboardRoutes'
+import '../assets/styles/dashboard.css'
 
 const Dashboard: React.FC = () => {
     return (
@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => {
         <Header />
         <main className="main">
           <Sidebar />
-          <Projects />
+          <DashboardRouteMap />
         </main>
       </>
     )

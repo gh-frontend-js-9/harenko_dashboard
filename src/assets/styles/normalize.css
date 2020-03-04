@@ -164,10 +164,13 @@
     font-size: 100%; /* 1 */
     line-height: 1.15; /* 1 */
     margin: 0; /* 2 */
-    cursor: pointer;
   }
   
   a {
+    cursor: pointer;
+  }
+
+  button {
     cursor: pointer;
   }
   /**

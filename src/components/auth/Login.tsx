@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom'
+import { loginFetchData } from '../../store/actions/loginActions'
 import '../../assets/styles/log-in.css'
 
-export class LoginForm extends React.Component<any, any> {
+class LoginForm extends React.Component<any, any> {
   constructor(props: Object) {
     super(props);
     this.state = {
@@ -23,42 +24,16 @@ export class LoginForm extends React.Component<any, any> {
     });
   }
 
-  handleSubmit(event: any) {
-    fetch('https://geekhub-frontend-js-9.herokuapp.com/api/users/login', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.state),
-    })
-      .then(response => {
-        response.json()
-        return response
-      })
-      .then(response => {
-        if (response.ok) {
-          this.setState({
-            isOk: true
-          })
-          let token: any = response.headers.get('x-auth-token')
-          localStorage.setItem('userToken', token)
-          return response
-        } else {
-          ReactDOM.render(
-            <span>Oops, looks like your email or password is incorrect.<br />
-              Please try again</span>,
-            document.getElementById('warning-area')
-          )
-        }
-      })
+  handleSubmit (event: any) {
+    this.props.fetchData('https://geekhub-frontend-js-9.herokuapp.com/api/users/login', this.state)
+    this.setState({isOk: true})
     event.preventDefault()
   }
 
   redirect() {
     if (this.state.isOk) {
       return (
-        <Redirect to="/Dashboard" />
+        <Redirect to="/dashboard" />
       )
     }
   }
@@ -69,7 +44,7 @@ export class LoginForm extends React.Component<any, any> {
         <div className="log-in">
           {this.redirect()}
           <span className="log-in-title">Log in</span>
-          <Link className="sign-up-link" to="/Sign">Not a member?</Link>
+          <Link className="sign-up-link" to="/sign">Not a member?</Link>
           <form onSubmit={this.handleSubmit} className="log-in-form" id="form">
             <input
               onChange={this.handleChange}
@@ -86,7 +61,7 @@ export class LoginForm extends React.Component<any, any> {
               value={this.state.password}
               placeholder="Password..." />
             <div className="log-warning" id="warning-area"></div>
-            <Link className="remember" to="/Reset">Forgot password?</Link>
+            <Link className="remember" to="/reset">Forgot password?</Link>
             <button className="submit-btn" type="submit">Log in</button>
           </form>
         </div>
@@ -94,3 +69,17 @@ export class LoginForm extends React.Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {
+    fetchData: state.fetchData
+  }
+}
+
+const mapDispatchToProps = (dispath: any) => {
+  return {
+    fetchData: (url: string, loginUserData: object) => dispath(loginFetchData(url, loginUserData)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

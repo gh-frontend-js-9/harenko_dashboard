@@ -68,7 +68,7 @@ export class ResetForm extends React.Component<any, any> {
                 <div className="log-in">
                 {this.redirect()}
                     <span className="log-in-title">Reset password</span>
-                    <Link className="sign-up-link" to="/Sign">Not a member?</Link>
+                    <Link className="sign-up-link" to="/sign">Not a member?</Link>
                     <form onSubmit={this.handleSubmit} className="log-in-form" id="form">
                         <input 
                         onChange={this.handleChange} 

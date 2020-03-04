@@ -1,5 +1,6 @@
 import React from 'react';
-import { ModalWindow } from './ProjectModalWindow'
+import ModalWindow from './projects/ProjectModalWindow'
+import { Link } from 'react-router-dom'
 
 export const Header: React.FC = () => {
     return (
@@ -23,9 +24,9 @@ export const Sidebar: React.FC = () => {
         <div className="user-panel-block">
             <div className="panel-btn-block">
                 <a className="panel-btn-block_home-btn" ></a>
-                <a className="panel-btn-block_menu-btn" ></a>
+                <Link className="panel-btn-block_menu-btn" to="/dashboard/projects"></Link>
                 <a className="panel-btn-block_trending-btn" ></a>
-                <a className="panel-btn-block_message-btn" ></a>
+                <Link className="panel-btn-block_message-btn" to="/dashboard/messages"></Link>
                 <a className="panel-btn-block_friends-btn" ></a>
             </div>
         </div>
